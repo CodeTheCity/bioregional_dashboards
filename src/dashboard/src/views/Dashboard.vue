@@ -7,30 +7,32 @@
           <li class="tools-power">SCALE</li>
           <li class="tools-power">Bioregion</li>
           <li class="tools-power">River Dee Watershed</li>
-          <li class="tools-power">Add</li>
-          <li class="tools-power">Story</li>
+          <li class="tools-power"><a @click.prevent="viewStorytools" href="" id="story-button">Story</a></li>
         </ul>
       </div>
-      <div id="story-board">
+      <div v-if="liveStorytools === true" id="story-board">
         <ul>
-          <li class="story-stage">50 years ago</li>
+          <li class="story-stage"><a @click.prevent="viewStage" href="" id="story-button">50 years ago</a></li>
           <li class="story-stage">20 years ago</li>
-          <li class="story-stage">This year</li>
+          <li class="story-stage"><a @click.prevent="viewStage" href="" id="story-button">Now</a></li>
           <li class="story-stage-future">20 years future</li>
-          <li class="story-stage-future">50 years future</li>
+          <li class="story-stage-future"><a @click.prevent="viewStage" href="" id="story-button">50 years future</a></li>
+          <li class="tools-stage"><a @click.prevent="addStorystage" href="" id="story-button">add</a></li>
           <li><button @click.prevent="startStory" class="button is-primary">Play story</button></li>
           <li class="tools-story">Record Story</li>
         </ul>
       </div>
       <div id="acitve-board">
-        <img alt="Vue logo" src="../assets/riverdeeshed.png">
+        <div id="map-location">
+          <img alt="Vue logo" src="../assets/riverdeeshed.png">
+        </div>
         <div id="filter-tools">
           <ul>
-            <li class="tools-filter">Waterflow</li>
-            <li class="tools-filter">Rainfall</li>
-            <li class="tools-power">Brids</li>
-            <li class="tools-power">Soil</li>
-            <li class="tools-power">ADD</li>
+            <li class="tools-filter"><a href="" @click.prevent="filterCategory" >Waterflow</a></li>
+            <li class="tools-filter"><a href="" @click.prevent="filterCategory">Rainfall</a></li>
+            <li class="tools-filter"><a href="" @click.prevent="filterCategory">Brids</a></li>
+            <li class="tools-filter">Soil</li>
+            <li class="tools-filter">ADD</li>
           </ul>
         </div>
       </div>
@@ -117,7 +119,8 @@ export default {
       resizable: 'Resizable',
       warpable: 'Warpable'
     },
-    currentState: 'scalable'
+    currentState: 'scalable',
+    liveStorytools: false
   }),
   methods: {
     handleDrag ({ target, transform }) {
@@ -145,6 +148,15 @@ export default {
       Object.keys(this.states).forEach((key) => {
         this.moveable[key] = false
       })
+    },
+    viewStorytools (ev) {
+      console.log(ev)
+      console.log('event story tools')
+      this.liveStorytools = !this.liveStorytools
+    },
+    viewStage (ev) {
+      console.log(ev)
+      console.log('stage clicked')
     }
   },
   watch: {
@@ -186,4 +198,12 @@ ul li {
   display: inline;
 }
 
+#filter-tools ul li {
+  border: 1px solid lightgrey;
+  margin: 1em;
+}
+
+#map-location {
+  display: inline;
+}
 </style>
