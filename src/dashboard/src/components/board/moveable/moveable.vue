@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="space">
     <slot/>
   </div>
 </template>
@@ -109,3 +109,13 @@ export default {
   }
 }
 </script>
+
+<style>
+#space  {
+  display: inline-block;
+  border: 1px solid green;
+  text-align: center;
+  width: 400px;
+}
+
+</style>

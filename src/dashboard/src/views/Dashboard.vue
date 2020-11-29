@@ -3,7 +3,13 @@
     <header>Dashboard</header>
     <div id="tools-holder">
       <div id="tools-top">
-        Top board
+        <ul>
+          <li class="tools-power">SCALE</li>
+          <li class="tools-power">Bioregion</li>
+          <li class="tools-power">River Dee Watershed</li>
+          <li class="tools-power">Add</li>
+          <li class="tools-power">Record Story</li>
+        </ul>
       </div>
       <div id="acitve-board">
         <img alt="Vue logo" src="../assets/riverdeeshed.png">
@@ -19,7 +25,18 @@
           @rotate="handleRotate"
           @warp="handleWarp"
         >
-          <span>Vue Moveable</span>
+          <span>Chart1</span>
+        </Moveable>
+        <Moveable
+          class="moveable"
+          v-bind="moveable"
+          @drag="handleDrag"
+          @resize="handleResize"
+          @scale="handleScale"
+          @rotate="handleRotate"
+          @warp="handleWarp"
+        >
+          <span>Chart2</span>
         </Moveable>
         <div class="buttons able">
           <a
@@ -101,3 +118,18 @@ export default {
   }
 }
 </script>
+
+<style>
+.moveable {
+  display: inline-block;
+  border: 2px solid red;
+}
+
+ul li {
+  display: inline;
+}
+
+.tools-power {
+  margin: 1em;
+}
+</style>

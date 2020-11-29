@@ -38,6 +38,7 @@ export default {
   border: 1px solid green;
   text-align: center;
 }
+
 #prime-bioregion {
   display: block;
   text-align: center;

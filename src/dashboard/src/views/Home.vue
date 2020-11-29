@@ -4,6 +4,7 @@
     <HelloWorld msg="Welcome, what kind of dashboard would you like to build?"/>
     <Start-Dashboard></Start-Dashboard>
     <Clone-Dashboard></Clone-Dashboard>
+    <Match-Bioregion></Match-Bioregion>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import StartDashboard from '@/components/setup/inputBox.vue'
 import CloneDashboard from '@/components/setup/cloneBoard.vue'
+import MatchBioregion from '@/components/setup/matchBioregion.vue'
 
 export default {
   name: 'Home',
@@ -19,6 +21,7 @@ export default {
     HelloWorld,
     StartDashboard,
     CloneDashboard,
-  },
+    MatchBioregion
+  }
 }
 </script>
