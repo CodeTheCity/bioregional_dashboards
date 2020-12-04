@@ -145,7 +145,7 @@ export default {
   },
   async created () {
     this.loading = true //
-    const response = await fetch('http://localhost:8080/geoman.geojson')
+    const response = await fetch('http://localhost:8080/geoman2.geojson')
     // const response = await fetch('http://localhost:8080/communes-pays-de-la-loire.geojson')
     const data = await response.json()
     console.log('geo back github???')
