@@ -3,7 +3,7 @@ module.exports = {
     ? '/healthscience/code/diyhstoolkit/dist/'
     : '/', */
   devServer: {
-    // proxy: 'https://bioregion.healthscience.network/'
+    // proxy: 'https://bioregion.healthscience.network/',  // online server setup
     proxy: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/'
     // proxy: 'https://rawgit.com/gregoiredavid/france-geojson/master/regions/pays-de-la-loire/'
   }

@@ -1,6 +1,6 @@
 <template>
-  <div id="data-tools">
-    <!-- <div id="bottom-tools">
+  <div id="data-flow">
+    <div id="water-tools">
       <header>Data tools</header>
       <Moveable
         class="moveable"
@@ -51,7 +51,7 @@
         >{{ state }}</a>
       </div>
     </div>
-    <div id="bottom-tools-waterflow">
+    <!-- <div id="bottom-tools-waterflow">
       <header>Bottom tools waterflow</header>
       <Moveable
         class="moveable"
@@ -149,12 +149,12 @@
 
 <script>
 // @ is an alias to /src
-// import Moveable from '@/components/board/moveable/moveable.vue'
+import Moveable from '@/components/board/moveable/moveable.vue'
 
 export default {
-  name: 'data-tools',
+  name: 'data-flow',
   components: {
-    // Moveable
+    Moveable
   },
   data: () => ({
     moveable: {
@@ -205,11 +205,6 @@ export default {
       Object.keys(this.states).forEach((key) => {
         this.moveable[key] = false
       })
-    },
-    viewStorytools (ev) {
-      console.log(ev)
-      console.log('event story tools')
-      this.liveStorytools = !this.liveStorytools
     },
     viewStage (ev) {
       console.log(ev)

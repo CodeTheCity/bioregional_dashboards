@@ -11,32 +11,20 @@
         </ul>
       </div>
       <div v-if="liveStorytools === true" id="story-board">
+        <story-tools></story-tools>
+      </div>
+      <div id="filter-tools">
         <ul>
-          <li class="story-stage"><a @click.prevent="viewStage" href="" id="story-button">50 years ago</a></li>
-          <li class="story-stage">20 years ago</li>
-          <li class="story-stage"><a @click.prevent="viewStage" href="" id="story-button">Now</a></li>
-          <li class="story-stage-future">20 years future</li>
-          <li class="story-stage-future"><a @click.prevent="viewStage" href="" id="story-button">50 years future</a></li>
-          <li class="tools-stage"><a @click.prevent="addStorystage" href="" id="story-button">add</a></li>
-          <li><button @click.prevent="startStory" class="button is-primary">Play story</button></li>
-          <li class="tools-story">Record Story</li>
+          <li class="tools-filter"><a href="" @click.prevent="filterCategory" >Waterflow</a></li>
+          <li class="tools-filter"><a href="" @click.prevent="filterCategory">Rainfall</a></li>
+          <li class="tools-filter"><a href="" @click.prevent="filterCategory">Brids</a></li>
+          <li class="tools-filter">Soil</li>
+          <li class="tools-filter">ADD</li>
         </ul>
       </div>
       <div id="acitve-board">
-        <div id="map-location">
-          <!-- <div v-if="mapState === true" >
-            <img alt="watershed" src="../assets/riverdeeshed.png">
-          </div> -->
+        <div id="map-location-holder">
           <map-location></map-location>
-        </div>
-        <div id="filter-tools">
-          <ul>
-            <li class="tools-filter"><a href="" @click.prevent="filterCategory" >Waterflow</a></li>
-            <li class="tools-filter"><a href="" @click.prevent="filterCategory">Rainfall</a></li>
-            <li class="tools-filter"><a href="" @click.prevent="filterCategory">Brids</a></li>
-            <li class="tools-filter">Soil</li>
-            <li class="tools-filter">ADD</li>
-          </ul>
         </div>
       </div>
       <data-flow></data-flow>
@@ -46,12 +34,14 @@
 
 <script>
 // @ is an alias to /src
+import StoryTools from '@/components/board/story/storyTools.vue'
 import MapLocation from '@/components/board/map/mapLocation.vue'
 import DataFlow from '@/components/board/datatools/dataFlow.vue'
 
 export default {
   name: 'Dashboard',
   components: {
+    StoryTools,
     MapLocation,
     DataFlow
   },
@@ -59,6 +49,14 @@ export default {
     liveStorytools: false
   }),
   methods: {
+    viewStorytools (ev) {
+      console.log(ev)
+      console.log('event story tools')
+      this.liveStorytools = !this.liveStorytools
+    },
+    filterCategory (ev) {
+      console.log('type of data to filter on')
+    }
   }
 }
 </script>
@@ -95,10 +93,12 @@ ul li {
 
 #filter-tools ul li {
   border: 1px solid lightgrey;
-  margin: 1em;
+  margin: 0.2em;
 }
 
-#map-location {
-  display: inline;
+#map-location-holder {
+  border: 2px solid orange;
+  display: block;
+  height: auto;
 }
 </style>

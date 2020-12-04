@@ -94,7 +94,7 @@ export default {
       zoom: 9,
       center: latLng(57.0771542, -2.7823257),
       geojson: null,
-      fillColor: '#e4ce7f',
+      fillColor: '#7F98E4',
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -120,10 +120,10 @@ export default {
       return () => {
         return {
           weight: 2,
-          color: '#ECEFF1',
+          color: '#7F98E4',
           opacity: 1,
           fillColor: fillColor,
-          fillOpacity: 1
+          fillOpacity: 0.3
         }
       }
     },
@@ -146,6 +146,7 @@ export default {
   async created () {
     this.loading = true //
     const response = await fetch('http://localhost:8080/geoman2.geojson')
+    // const response = await fetch('https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson')
     // const response = await fetch('http://localhost:8080/communes-pays-de-la-loire.geojson')
     const data = await response.json()
     console.log('geo back github???')
@@ -173,7 +174,8 @@ export default {
 <style>
 #open-map {
   height: 800px;
-  width: 1200px;
+  width: auto;
+  margin: 4em;
   border: 1px solid black;
 }
 
