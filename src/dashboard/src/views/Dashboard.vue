@@ -24,7 +24,10 @@
       </div>
       <div id="acitve-board">
         <div id="map-location">
-          <img alt="Vue logo" src="../assets/riverdeeshed.png">
+          <!-- <div v-if="mapState === true" >
+            <img alt="watershed" src="../assets/riverdeeshed.png">
+          </div> -->
+          <map-location></map-location>
         </div>
         <div id="filter-tools">
           <ul>
@@ -36,134 +39,25 @@
           </ul>
         </div>
       </div>
-      <div id="bottom-tools">
-        <header>Bottom tools</header>
-        <Moveable
-          class="moveable"
-          v-bind="moveable"
-          @drag="handleDrag"
-          @resize="handleResize"
-          @scale="handleScale"
-          @rotate="handleRotate"
-          @warp="handleWarp"
-        >
-          <span>
-            <iframe frameborder="0" width="300" height="446" src="https://gaugemap.blob.core.windows.net/gaugemapwidgets/4250-2442-1-300x446.html"></iframe>
-          </span>
-        </Moveable>
-        <Moveable
-          class="moveable"
-          v-bind="moveable"
-          @drag="handleDrag"
-          @resize="handleResize"
-          @scale="handleScale"
-          @rotate="handleRotate"
-          @warp="handleWarp"
-        >
-          <span>
-            <iframe frameborder="0" width="300" height="446" src="https://gaugemap.blob.core.windows.net/gaugemapwidgets/4297-2489-1-300x446.html"></iframe>
-          </span>
-        </Moveable>
-        <Moveable
-          class="moveable"
-          v-bind="moveable"
-          @drag="handleDrag"
-          @resize="handleResize"
-          @scale="handleScale"
-          @rotate="handleRotate"
-          @warp="handleWarp"
-        >
-          <span>
-            <iframe frameborder="0" width="300" height="446" src="https://gaugemap.blob.core.windows.net/gaugemapwidgets/4148-2341-1-300x446.html"></iframe>
-          </span>
-        </Moveable>
-        <div class="buttons able">
-          <a
-            href="#"
-            v-for="(state, key) in states"
-            :key="key"
-            :class="{ selected: currentState === key }"
-            @click="currentState = key"
-          >{{ state }}</a>
-        </div>
-      </div>
+      <data-flow></data-flow>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Moveable from '@/components/board/moveable/moveable.vue'
+import MapLocation from '@/components/board/map/mapLocation.vue'
+import DataFlow from '@/components/board/datatools/dataFlow.vue'
 
 export default {
   name: 'Dashboard',
   components: {
-    Moveable
+    MapLocation,
+    DataFlow
   },
   data: () => ({
-    moveable: {
-      draggable: true,
-      throttleDrag: 1,
-      resizable: false,
-      throttleResize: 1,
-      keepRatio: false,
-      scalable: true,
-      throttleScale: 0.01,
-      rotatable: true,
-      throttleRotate: 0.2,
-      pinchable: true,
-      origin: false
-    },
-    states: {
-      scalable: 'Scalable',
-      resizable: 'Resizable',
-      warpable: 'Warpable'
-    },
-    currentState: 'scalable',
-    liveStorytools: false
   }),
   methods: {
-    handleDrag ({ target, transform }) {
-      console.log('onDrag', transform)
-      target.style.transform = transform
-    },
-    handleResize ({ target, width, height }) {
-      console.log('onResize', width, height)
-      target.style.width = `${width}px`
-      target.style.height = `${height}px`
-    },
-    handleScale ({ target, transform }) {
-      console.log('onScale', transform)
-      target.style.transform = transform
-    },
-    handleRotate ({ target, transform }) {
-      console.log('onRotate', transform)
-      target.style.transform = transform
-    },
-    handleWarp ({ target, transform }) {
-      console.log('onWarp', transform)
-      target.style.transform = transform
-    },
-    clearAllStates () {
-      Object.keys(this.states).forEach((key) => {
-        this.moveable[key] = false
-      })
-    },
-    viewStorytools (ev) {
-      console.log(ev)
-      console.log('event story tools')
-      this.liveStorytools = !this.liveStorytools
-    },
-    viewStage (ev) {
-      console.log(ev)
-      console.log('stage clicked')
-    }
-  },
-  watch: {
-    currentState (newState) {
-      this.clearAllStates()
-      this.moveable[newState] = true
-    }
   }
 }
 </script>
