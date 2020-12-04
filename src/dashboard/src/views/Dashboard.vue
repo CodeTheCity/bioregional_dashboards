@@ -56,6 +56,7 @@ export default {
     DataFlow
   },
   data: () => ({
+    liveStorytools: false
   }),
   methods: {
   }

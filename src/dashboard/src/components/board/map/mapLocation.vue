@@ -91,7 +91,7 @@ export default {
       loading: false,
       show: true,
       enableTooltip: true,
-      zoom: 13,
+      zoom: 9,
       center: latLng(57.0771542, -2.7823257),
       geojson: null,
       fillColor: '#e4ce7f',
@@ -145,8 +145,10 @@ export default {
   },
   async created () {
     this.loading = true
-    const response = await fetch('https://github.com/CodeTheCity/bioregional_dashboards/blob/main/data/geojsonshed/geoman.json')
+    const response = await fetch('https://github.com/CodeTheCity/bioregional_dashboards/blob/main/data/geojsonshed/geoman.geojson')
     const data = await response.json()
+    console.log('geo back github???')
+    console.log(data)
     this.geojson = data
     this.loading = false
   },
