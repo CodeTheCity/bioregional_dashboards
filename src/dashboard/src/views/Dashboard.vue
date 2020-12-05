@@ -4,6 +4,7 @@
     <div id="tools-holder">
       <div id="tools-top">
         <ul>
+          <li class="tools-power"><visualisation-medium></visualisation-medium></li>
           <li class="tools-power">SCALE</li>
           <li class="tools-power">Bioregion</li>
           <li class="tools-power">River Dee Watershed</li>
@@ -34,6 +35,7 @@
 
 <script>
 // @ is an alias to /src
+import VisualisationMedium from '@/components/board/medium/mediumView.vue'
 import StoryTools from '@/components/board/story/storyTools.vue'
 import MapLocation from '@/components/board/map/mapLocation.vue'
 import DataFlow from '@/components/board/datatools/dataFlow.vue'
@@ -41,6 +43,7 @@ import DataFlow from '@/components/board/datatools/dataFlow.vue'
 export default {
   name: 'Dashboard',
   components: {
+    VisualisationMedium,
     StoryTools,
     MapLocation,
     DataFlow
@@ -78,13 +81,7 @@ ul li {
 .story-stage {
   border: 2px solid green;
   margin-right: 1em;
-  padding: 1em;
-}
-
-.story-stage-future {
-  border: 2px solid orange;
-  margin-right: 1em;
-  padding: 1em;
+  padding: 0.2em;
 }
 
 #filter-tools {
@@ -97,7 +94,7 @@ ul li {
 }
 
 #map-location-holder {
-  border: 2px solid orange;
+  border: 1px solid orange;
   display: block;
   height: auto;
 }

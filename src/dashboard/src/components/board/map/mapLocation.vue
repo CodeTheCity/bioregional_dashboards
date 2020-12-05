@@ -175,7 +175,7 @@ export default {
 #open-map {
   height: 800px;
   width: auto;
-  margin: 4em;
+  margin: 1em;
   border: 1px solid black;
 }
 

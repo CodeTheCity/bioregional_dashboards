@@ -42,4 +42,9 @@ export default {
 </script>
 
 <style>
+.story-stage-future {
+  border: 2px solid orange;
+  margin-right: 0.2em;
+  padding: 1em;
+}
 </style>
