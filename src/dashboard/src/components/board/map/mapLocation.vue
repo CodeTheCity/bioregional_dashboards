@@ -1,6 +1,6 @@
 <template>
   <div id="open-map">
-    <div id="map-tools"> {{ geojson }}
+    <div id="map-tools">
       <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
       <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
       <button @click='showLongText'>
@@ -86,20 +86,27 @@ export default {
     LTooltip,
     LGeoJson
   },
+  created: function () {
+    this.firstSetBioregion()
+  },
   computed: {
     loading () {
+      console.log('loading')
+      console.log(this.$store.state.loading)
       return this.$store.state.loading
     },
+    showMapLive () {
+      console.log('this.$store.state.showLive')
+      this.visMap(this.$store.state.showLive)
+      return this.$store.state.showLive
+    },
     geojson () {
-      console.log('any geo json????')
-      console.log(this.$store.state.liveGEOJSON)
-      if (this.$store.state.liveGEOJSON.type !== undefined) {
+      if (this.$store.state.liveGEOJSON.type === 'FeatureCollection') {
         console.log('set geo')
-        this.visMap(true)
         return this.$store.state.liveGEOJSON
       } else {
         console.log('no geogo')
-        return {}
+        return null
       }
     },
     options () {
@@ -138,7 +145,7 @@ export default {
   data () {
     return {
       // loading: false,
-      show: false,
+      show: true,
       enableTooltip: true,
       zoom: 9,
       center: latLng(57.0771542, -2.7823257),
@@ -155,7 +162,7 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
-      showMap: false
+      showMap: true
     }
   },
   /* async created () {
@@ -169,9 +176,16 @@ export default {
     this.geojson = data
   }, */
   methods: {
+    firstSetBioregion () {
+      this.$store.dispatch('actionBioregion', { id: 125, name: 'Dee watershed' })
+    },
     visMap (ms) {
+      console.log('vismap function')
+      console.log(ms)
       this.showMap = ms
       this.show = ms
+      console.log(this.showMap)
+      console.log(this.show)
     },
     zoomUpdate (zoom) {
       this.currentZoom = zoom
