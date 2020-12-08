@@ -1,6 +1,6 @@
 <template>
   <div id="open-map">
-    <div id="map-tools">
+    <div id="map-tools"> {{ geojson }}
       <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
       <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
       <button @click='showLongText'>
@@ -27,7 +27,7 @@
         type="color"
       >
       <br>
-    </div>
+    </div> ss {{  showMap }} pp {{ show }}
     <l-map
       v-if='showMap'
       :zoom='zoom'
@@ -86,30 +86,22 @@ export default {
     LTooltip,
     LGeoJson
   },
-  data () {
-    return {
-      loading: false,
-      show: true,
-      enableTooltip: true,
-      zoom: 9,
-      center: latLng(57.0771542, -2.7823257),
-      geojson: null,
-      fillColor: '#7F98E4',
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(57.077154, -2.782325),
-      withTooltip: latLng(57.077154, -2.782325),
-      currentZoom: 11.5,
-      currentCenter: latLng(57.077154, -2.782325),
-      showParagraph: false,
-      mapOptions: {
-        zoomSnap: 0.5
-      },
-      showMap: true
-    }
-  },
   computed: {
+    loading () {
+      return this.$store.state.loading
+    },
+    geojson () {
+      console.log('any geo json????')
+      console.log(this.$store.state.liveGEOJSON)
+      if (this.$store.state.liveGEOJSON.type !== undefined) {
+        console.log('set geo')
+        this.visMap(true)
+        return this.$store.state.liveGEOJSON
+      } else {
+        console.log('no geogo')
+        return {}
+      }
+    },
     options () {
       return {
         onEachFeature: this.onEachFeatureFunction
@@ -143,7 +135,30 @@ export default {
       }
     }
   },
-  async created () {
+  data () {
+    return {
+      // loading: false,
+      show: false,
+      enableTooltip: true,
+      zoom: 9,
+      center: latLng(57.0771542, -2.7823257),
+      // geojson: null,
+      fillColor: '#7F98E4',
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      withPopup: latLng(57.077154, -2.782325),
+      withTooltip: latLng(57.077154, -2.782325),
+      currentZoom: 11.5,
+      currentCenter: latLng(57.077154, -2.782325),
+      showParagraph: false,
+      mapOptions: {
+        zoomSnap: 0.5
+      },
+      showMap: false
+    }
+  },
+  /* async created () {
     this.loading = true //
     const response = await fetch('http://localhost:8080/geoman2.geojson')
     // const response = await fetch('https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson')
@@ -152,9 +167,12 @@ export default {
     console.log('geo back github???')
     console.log(data)
     this.geojson = data
-    this.loading = false
-  },
+  }, */
   methods: {
+    visMap (ms) {
+      this.showMap = ms
+      this.show = ms
+    },
     zoomUpdate (zoom) {
       this.currentZoom = zoom
     },

@@ -6,8 +6,16 @@
         <ul>
           <li class="tools-power"><visualisation-medium></visualisation-medium></li>
           <li class="tools-power">SCALE</li>
-          <li class="tools-power">Bioregion</li>
-          <li class="tools-power">River Dee Watershed</li>
+          <li class="tools-power">
+            Bioregion:
+            <label for="bioregion-select"></label>
+            <select class="select-bioregion-id" id="bioregion-mapping-build" @change="bioregionSelect" v-model="bioregionID">
+              <!-- <option value="none" selected="">please select</option> -->
+              <option v-for="bplace in bioregionList" :key="bplace.id" v-bind:value="bplace">
+                {{ bplace.name }}
+              </option>
+            </select>
+          </li>
           <li class="tools-power"><a @click.prevent="viewStorytools" href="" id="story-button">Story</a></li>
         </ul>
       </div>
@@ -48,8 +56,14 @@ export default {
     MapLocation,
     DataFlow
   },
+  computed: {
+    bioregionList () {
+      return [{ id: 123, name: 'Earth' }, { id: 124, name: 'Scotland' }, { id: 125, name: 'Dee watershed' }, { id: 126, name: 'Dee tributaries' }]
+    }
+  },
   data: () => ({
-    liveStorytools: false
+    liveStorytools: false,
+    bioregionID: ''
   }),
   methods: {
     viewStorytools (ev) {
@@ -59,6 +73,11 @@ export default {
     },
     filterCategory (ev) {
       console.log('type of data to filter on')
+    },
+    bioregionSelect () {
+      console.log('selected bioregion')
+      console.log(this.bioregionID)
+      this.$store.dispatch('actionBioregion', this.bioregionID)
     }
   }
 }
