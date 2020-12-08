@@ -100,6 +100,12 @@ export default {
       this.visMap(this.$store.state.showLive)
       return this.$store.state.showLive
     },
+    currentZoom () {
+      return this.$store.state.zoomLive
+    },
+    zoom () {
+      return this.$store.state.zoomLive
+    },
     geojson () {
       if (this.$store.state.liveGEOJSON.type === 'FeatureCollection') {
         console.log('set geo')
@@ -147,7 +153,7 @@ export default {
       // loading: false,
       show: true,
       enableTooltip: true,
-      zoom: 9,
+      // zoom: 2,
       center: latLng(57.0771542, -2.7823257),
       // geojson: null,
       fillColor: '#7F98E4',
@@ -156,7 +162,7 @@ export default {
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       withPopup: latLng(57.077154, -2.782325),
       withTooltip: latLng(57.077154, -2.782325),
-      currentZoom: 11.5,
+      // currentZoom: 11.5,
       currentCenter: latLng(57.077154, -2.782325),
       showParagraph: false,
       mapOptions: {
