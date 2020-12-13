@@ -7,8 +7,7 @@
           <li class="tools-power"><visualisation-medium></visualisation-medium></li>
           <li class="tools-power">SCALE</li>
           <li class="tools-power">
-            Bioregion:
-            <label for="bioregion-select"></label>
+            <label for="bioregion-select">Bioregion:</label>
             <select class="select-bioregion-id" id="bioregion-mapping-build" @change="bioregionSelect" v-model="bioregionID">
               <!-- <option value="none" selected="">please select</option> -->
               <option v-for="bplace in bioregionList" :key="bplace.id" v-bind:value="bplace">
@@ -95,12 +94,6 @@ ul li {
 
 .tools-power {
   margin: 1em;
-}
-
-.story-stage {
-  border: 2px solid green;
-  margin-right: 1em;
-  padding: 0.2em;
 }
 
 #filter-tools {

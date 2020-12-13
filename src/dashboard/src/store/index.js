@@ -22,7 +22,8 @@ export default new Vuex.Store({
     loading: false,
     liveGEOJSON: {},
     showLive: false,
-    zoomLive: 11.5
+    zoomLive: 11.5,
+    storyStages: []
   },
   getters: {
     liveGeojson: state => state.liveGEOJSON
@@ -43,6 +44,10 @@ export default new Vuex.Store({
       console.log(inVerified)
       state.showLive = inVerified
       console.log(state.showLive)
+    },
+    SET_NEW_STAGE (state, inVerified) {
+      console.log('set new stage')
+      state.storyStages.push(inVerified)
     }
   },
   actions: {
@@ -62,6 +67,9 @@ export default new Vuex.Store({
       const data = await response.json()
       context.commit('SET_BIOREGION', data)
       context.commit('SET_LOADING_BIOREGION', false)
+    },
+    actionNewsage (context, update) {
+      context.commit('SET_NEW_STAGE', update)
     }
   },
   modules: {
