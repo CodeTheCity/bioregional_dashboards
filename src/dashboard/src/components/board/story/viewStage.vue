@@ -1,7 +1,20 @@
 <template>
   <div class="stage-story-holder">
     <div id="stage-display">
-      {{ stageID }}
+      <div id="stage-reference">
+        {{ stageID.refcontract }}
+      </div>
+      <div id="stage-name">
+        {{ stageID.name }}
+      </div>
+      <div v-if="stageID.text" id="stage-text">
+       {{ stageID.text }}
+      </div>
+
+      <div v-if="stageID.data" id="stage-data">
+       {{ stageID.data }} <a href="" class="data-vis" @click.prevent="viewOnmap">view to map</a>
+      </div>
+
     </div>
   </div>
 </template>
@@ -19,6 +32,9 @@ export default {
   data: () => ({
   }),
   methods: {
+    viewOnmap () {
+      console.log('view data on map')
+    }
   }
 }
 </script>

@@ -10,7 +10,7 @@
           </li>
         </ul>
       </form>
-      <button @click.prevent="startBuild" class="button is-primary">Start build</button>
+      <button @click.prevent="startBuild" class="button is-primary">Build bioregion</button>
     </div>
   </div>
 </template>
@@ -26,7 +26,13 @@ export default {
       text: '',
       forum: ''
     }
-  })
+  }),
+  methods: {
+    startBuild () {
+      // move to lifeboard visualisation
+      this.$router.push('dashboard')
+    }
+  }
 }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="stage-build-holder">
+  <div v-if="stageActive === true" class="stage-build-holder">
     <div id="setup-tools">
       <form id="stage-name">
         <label>Stage Name</label>
@@ -31,9 +31,10 @@
       <div v-if="stageType.id === 3" >
         Experiment
       </div>
+      <button @click.prevent="saveStage" class="button is-primary">Save</button>
     </div>
     <div v-if="stageActive === true" id="stage-display-preview">
-      <header>Stage {{ stageID }} </header>
+      <header>Stage preview area {{ stageID }} </header>
       <ul>
         <li>
           Stage name: {{ stageName }}
@@ -45,7 +46,6 @@
           Text: {{ stageText }}
         </li>
       </ul>
-      <button @click.prevent="saveStage" class="button is-primary">Save</button>
     </div>
   </div>
 </template>
@@ -60,6 +60,11 @@ export default {
   props: {
     stageID: Object,
     stageActive: null
+  },
+  computed: {
+    liveStageCount () {
+      return this.$store.state.stageCount
+    }
   },
   data: () => ({
     stageName: '',
@@ -77,13 +82,26 @@ export default {
     saveStage (ev) {
       console.log(ev)
       console.log('save stage')
+      // first stage if yes, save name of story
+      console.log('stage count')
+      console.log(this.liveStageCount)
+      if (this.liveStageCount === 0) {
+        // save story name and create holder for story
+        this.$store.dispatch('actionNewstory')
+      }
       let prepareStage = {}
-      prepareStage.type =
-      prepareStage.text =
-      prepareStage.data =
-      prepareStage.image =
-      prepareStage.Experiment =
-      this.$store.dispatch('actionNewsage', prepareStage)
+      prepareStage.type = 1
+      prepareStage.text = 2
+      prepareStage.data = 3
+      prepareStage.image = 4
+      prepareStage.Experiment = 5
+      this.$store.dispatch('actionNewstage', prepareStage)
+      // clear the forms
+      this.stageText = ''
+      this.stageName = ''
+    },
+    statetypeSelect () {
+      console.log('change s')
     }
   }
 }

@@ -15,7 +15,6 @@
         <img alt="3D simulation" src="../../../assets/riverdeeshed3d.png">
       </template>
       <template v-slot:submit-form>
-        <button>Close</button>
       </template>
     </medium-modal>
   </div>

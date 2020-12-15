@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    storyLive: [{ name: 'Waterflow', id: '0001' }, { name: 'Rainfall', id: '0002' }, { name: 'Soil', id: '0003' }, { name: 'Plants', id: '0004' }, { name: 'Birds', id: '0005' }],
     bioregionsList:
     [
       { id: 123, geojson: 'http://localhost:8080/geoman-earth.geojson', zoom: 2 },
@@ -18,12 +19,23 @@ export default new Vuex.Store({
       { id: 125, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson', zoom: 9 },
       { id: 126, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2-trib.geojson', zoom: 10 }
     ], */
+    storyRefContracts:
+    {
+      '0001': { stages: [{ refcontract: 303031, name: 'introduction', type: 'text', text: 'the history of the rive dee water flow over the decades' }, { refcontract: 303032, name: '1950 water flow', type: 'data', text: '', data: '99881' }, { refcontract: 303033, name: '1960 water flow', type: 'data', data: 'dfdfd' }] },
+      '0002': { stages: [1, 2, 3, 4] },
+      '0003': { stages: [1, 2] },
+      '0004': { stages: [1, 2, 3, 4] },
+      '0005': { stages: [1, 2, 3, 4, 5] }
+    },
+    liveStory: {},
+    liveStoryName: '',
+    storyStages: [],
+    stageCount: 0,
     bioregionSet: {},
     loading: false,
     liveGEOJSON: {},
     showLive: false,
-    zoomLive: 11.5,
-    storyStages: []
+    zoomLive: 11.5
   },
   getters: {
     liveGeojson: state => state.liveGEOJSON
@@ -45,9 +57,37 @@ export default new Vuex.Store({
       state.showLive = inVerified
       console.log(state.showLive)
     },
+    SET_SAVE_STORY (state, inVerified) {
+      console.log('save story holder list')
+      state.stageCount++
+      Vue.set(this.state.storyRefContracts, 'name', inVerified)
+      let storySummary = {}
+      storySummary.name = state.liveStoryName
+      storySummary.id = inVerified
+      this.state.storyLive.push(storySummary)
+    },
     SET_NEW_STAGE (state, inVerified) {
       console.log('set new stage')
       state.storyStages.push(inVerified)
+    },
+    SET_STAGE_COUNT (state, inVerified) {
+      console.log('set count stage')
+      state.stageCount++
+      console.log(state.stageCount)
+    },
+    SET_STORY_NAME (state, inVerified) {
+      console.log('create object to save story ref contract')
+      state.liveStoryName = inVerified
+    },
+    SET_LIVE_STORY (state, inVerified) {
+      console.log('set live story')
+      state.liveStory = state.storyRefContracts[inVerified]
+      console.log(state.liveStory)
+      state.storyStages = state.storyRefContracts[inVerified].stages
+    },
+    SET_EMPTY_STAGES (state, inVerified) {
+      console.log('empty stages')
+      state.storyStages = []
     }
   },
   actions: {
@@ -68,8 +108,23 @@ export default new Vuex.Store({
       context.commit('SET_BIOREGION', data)
       context.commit('SET_LOADING_BIOREGION', false)
     },
-    actionNewsage (context, update) {
+    actionNewstage (context, update) {
       context.commit('SET_NEW_STAGE', update)
+    },
+    actionNewstory (context, update) {
+      context.commit('SET_SAVE_STORY', update)
+    },
+    actionNewstoryCount (context, update) {
+      context.commit('SET_STAGE_COUNT', update)
+    },
+    actionStoryname (context, update) {
+      context.commit('SET_STORY_NAME', update)
+    },
+    actionLivestory (context, update) {
+      context.commit('SET_LIVE_STORY', update)
+    },
+    actionEmptystages (context, update) {
+      context.commit('SET_EMPTY_STAGES', update)
     }
   },
   modules: {

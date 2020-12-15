@@ -28,7 +28,7 @@
       >
       <br>
     </div> ss {{  showMap }} pp {{ show }}
-    <l-map
+    <l-map class="live-map"
       v-if='showMap'
       :zoom='zoom'
       :center='center'
@@ -171,16 +171,6 @@ export default {
       showMap: true
     }
   },
-  /* async created () {
-    this.loading = true //
-    const response = await fetch('http://localhost:8080/geoman2.geojson')
-    // const response = await fetch('https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson')
-    // const response = await fetch('http://localhost:8080/communes-pays-de-la-loire.geojson')
-    const data = await response.json()
-    console.log('geo back github???')
-    console.log(data)
-    this.geojson = data
-  }, */
   methods: {
     firstSetBioregion () {
       this.$store.dispatch('actionBioregion', { id: 125, name: 'Dee watershed' })
@@ -211,14 +201,18 @@ export default {
 
 <style>
 #open-map {
-  height: 800px;
+  height: 600px;
   width: auto;
-  margin: 1em;
+  margin: 2em;
   border: 1px solid black;
+  overflow: scroll;
 }
 
 #map-tools {
-  height: 200px;
+  min-height: 100px;
   /* overflow: auto; */
+}
+
+.live-map {
 }
 </style>

@@ -2,7 +2,7 @@
   <div id="data-flow">
     <div id="water-tools">
       <header>Data tools</header>
-      <Moveable
+      <!-- <Moveable
         class="moveable"
         v-bind="moveable"
         @drag="handleDrag"
@@ -49,7 +49,7 @@
           :class="{ selected: currentState === key }"
           @click="currentState = key"
         >{{ state }}</a>
-      </div>
+      </div> -->
     </div>
     <!-- <div id="bottom-tools-waterflow">
       <header>Bottom tools waterflow</header>
@@ -149,12 +149,12 @@
 
 <script>
 // @ is an alias to /src
-import Moveable from '@/components/board/moveable/moveable.vue'
+// import Moveable from '@/components/board/moveable/moveable.vue'
 
 export default {
   name: 'data-flow',
   components: {
-    Moveable
+    // Moveable
   },
   data: () => ({
     moveable: {
