@@ -206,7 +206,6 @@ export default {
       this.showParagraph = !this.showParagraph
     },
     innerClick (dpv) {
-      console.log(dpv)
       alert('data chart table Simulation' + dpv.data + ' ' + dpv.name)
     },
     prepLatLong (latlong) {

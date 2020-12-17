@@ -33,8 +33,7 @@ export default {
   }),
   methods: {
     viewOnmap (stage) {
-      console.log('view data on map')
-      console.log(stage)
+      this.$store.dispatch('actionStageID', stage)
     }
   }
 }

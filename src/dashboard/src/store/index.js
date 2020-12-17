@@ -27,7 +27,14 @@ export default new Vuex.Store({
       '0004': { stages: [1, 2, 3, 4] },
       '0005': { stages: [1, 2, 3, 4, 5] }
     },
-    liveDataLocation: [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }], //, { name: 'Soil', latlong: [57.077154, -2.782325], data: '0003' }, { name: 'Plants', latlong: [57.077154, -2.782325], data: '0004' }, { name: 'Birds', latlong: [57.077154, -2.782325], data: '0005' }]
+    experimentData:
+    {
+      '303031': { data: [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }] },
+      '303032': { data: [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }] },
+      '303033': { data: [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }] }
+    },
+    liveDataLocation: [],
+    /* [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }], { name: 'Soil', latlong: [57.077154, -2.782325], data: '0003' }, { name: 'Plants', latlong: [57.077154, -2.782325], data: '0004' }, { name: 'Birds', latlong: [57.077154, -2.782325], data: '0005' }] */
     liveStory: {},
     liveStoryName: '',
     storyStages: [],
@@ -78,6 +85,10 @@ export default new Vuex.Store({
     },
     SET_EMPTY_STAGES (state, inVerified) {
       state.storyStages = []
+    },
+    SET_STAGE_DATA (state, inVerified) {
+      let stageData = state.experimentData[inVerified.refcontract]
+      state.liveDataLocation = stageData.data
     }
   },
   actions: {
@@ -115,6 +126,9 @@ export default new Vuex.Store({
     },
     actionEmptystages (context, update) {
       context.commit('SET_EMPTY_STAGES', update)
+    },
+    actionStageID (context, update) {
+      context.commit('SET_STAGE_DATA', update)
     }
   },
   modules: {
