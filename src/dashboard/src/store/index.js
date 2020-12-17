@@ -21,12 +21,13 @@ export default new Vuex.Store({
     ], */
     storyRefContracts:
     {
-      '0001': { stages: [{ refcontract: 303031, name: 'introduction', type: 'text', text: 'the history of the rive dee water flow over the decades' }, { refcontract: 303032, name: '1950 water flow', type: 'data', text: '', data: '99881' }, { refcontract: 303033, name: '1960 water flow', type: 'data', data: 'dfdfd' }] },
+      '0001': { stages: [{ refcontract: 303031, name: 'introduction', type: 'text', text: 'the history of the rive dee water flow over the decades' }, { refcontract: 303032, name: '1950 water flow', type: 'data', text: '', data: '99881' }, { refcontract: 303033, name: 'Live water flow', type: 'data', data: 'dfdfd' }] },
       '0002': { stages: [1, 2, 3, 4] },
       '0003': { stages: [1, 2] },
       '0004': { stages: [1, 2, 3, 4] },
       '0005': { stages: [1, 2, 3, 4, 5] }
     },
+    liveDataLocation: [{ name: 'Marlodge', latlong: [57.071154, -2.782325], data: '1234' }, { name: 'Woodend', latlong: [57.077154, -2.542325], data: '0002' }], //, { name: 'Soil', latlong: [57.077154, -2.782325], data: '0003' }, { name: 'Plants', latlong: [57.077154, -2.782325], data: '0004' }, { name: 'Birds', latlong: [57.077154, -2.782325], data: '0005' }]
     liveStory: {},
     liveStoryName: '',
     storyStages: [],
@@ -52,13 +53,9 @@ export default new Vuex.Store({
       state.zoomLive = inVerified
     },
     SET_SHOWLIVE_MAP (state, inVerified) {
-      console.log('set show map')
-      console.log(inVerified)
       state.showLive = inVerified
-      console.log(state.showLive)
     },
     SET_SAVE_STORY (state, inVerified) {
-      console.log('save story holder list')
       state.stageCount++
       Vue.set(this.state.storyRefContracts, 'name', inVerified)
       let storySummary = {}
@@ -67,26 +64,19 @@ export default new Vuex.Store({
       this.state.storyLive.push(storySummary)
     },
     SET_NEW_STAGE (state, inVerified) {
-      console.log('set new stage')
       state.storyStages.push(inVerified)
     },
     SET_STAGE_COUNT (state, inVerified) {
-      console.log('set count stage')
       state.stageCount++
-      console.log(state.stageCount)
     },
     SET_STORY_NAME (state, inVerified) {
-      console.log('create object to save story ref contract')
       state.liveStoryName = inVerified
     },
     SET_LIVE_STORY (state, inVerified) {
-      console.log('set live story')
       state.liveStory = state.storyRefContracts[inVerified]
-      console.log(state.liveStory)
       state.storyStages = state.storyRefContracts[inVerified].stages
     },
     SET_EMPTY_STAGES (state, inVerified) {
-      console.log('empty stages')
       state.storyStages = []
     }
   },

@@ -46,17 +46,29 @@
         :options="options"
         :options-style="styleFunction"
       />
-      <l-marker :lat-lng='withPopup'>
+      <ul v-for="daVis of dataPoints" :key="daVis.id">
+        <l-marker :lat-lng="prepLatLong(daVis.latlong)">
+          <l-popup>
+            <div @click="innerClick(daVis)">
+              Click to view data
+              <p v-show='showParagraph'>
+                {{ daVis }}
+              </p>
+            </div>
+          </l-popup>
+        </l-marker>
+      </ul>
+      <!-- <l-marker :lat-lng='withPopup'>
         <l-popup>
           <div @click='innerClick'>
-            I am a popup
+            Click to view full chart
             <p v-show='showParagraph'>
               River Dee
             </p>
           </div>
         </l-popup>
-      </l-marker>
-      <l-marker :lat-lng='withTooltip'>
+      </l-marker> -->
+      <!-- <l-marker :lat-lng='withTooltip'>
         <l-tooltip :options='{ permanent: true, interactive: true }'>
           <div @click='innerClick'>
             I am a tooltip
@@ -65,16 +77,23 @@
             </p>
           </div>
         </l-tooltip>
-      </l-marker>
+      </l-marker> -->
     </l-map>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { latLng } from 'leaflet'
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip, LGeoJson } from 'vue2-leaflet'
+import { latLng, Icon } from 'leaflet'
+import { LMap, LTileLayer, LMarker, LPopup, LGeoJson } from 'vue2-leaflet'
 import 'leaflet/dist/leaflet.css'
+
+delete Icon.Default.prototype._getIconUrl
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+})
 
 export default {
   name: 'Map',
@@ -83,7 +102,7 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
-    LTooltip,
+    // LTooltip,
     LGeoJson
   },
   created: function () {
@@ -91,12 +110,9 @@ export default {
   },
   computed: {
     loading () {
-      console.log('loading')
-      console.log(this.$store.state.loading)
       return this.$store.state.loading
     },
     showMapLive () {
-      console.log('this.$store.state.showLive')
       this.visMap(this.$store.state.showLive)
       return this.$store.state.showLive
     },
@@ -108,16 +124,17 @@ export default {
     },
     geojson () {
       if (this.$store.state.liveGEOJSON.type === 'FeatureCollection') {
-        console.log('set geo')
         return this.$store.state.liveGEOJSON
       } else {
-        console.log('no geogo')
         return null
       }
     },
+    dataPoints () {
+      return this.$store.state.liveDataLocation
+    },
     options () {
       return {
-        onEachFeature: this.onEachFeatureFunction
+        // onEachFeature: this.onEachFeatureFunction
       }
     },
     styleFunction () {
@@ -176,12 +193,8 @@ export default {
       this.$store.dispatch('actionBioregion', { id: 125, name: 'Dee watershed' })
     },
     visMap (ms) {
-      console.log('vismap function')
-      console.log(ms)
       this.showMap = ms
       this.show = ms
-      console.log(this.showMap)
-      console.log(this.show)
     },
     zoomUpdate (zoom) {
       this.currentZoom = zoom
@@ -192,8 +205,12 @@ export default {
     showLongText () {
       this.showParagraph = !this.showParagraph
     },
-    innerClick () {
-      alert('River Dee Water Shed')
+    innerClick (dpv) {
+      console.log(dpv)
+      alert('data chart table Simulation' + dpv.data + ' ' + dpv.name)
+    },
+    prepLatLong (latlong) {
+      return latLng(latlong)
     }
   }
 }

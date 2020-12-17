@@ -12,7 +12,7 @@
       </div>
 
       <div v-if="stageID.data" id="stage-data">
-       {{ stageID.data }} <a href="" class="data-vis" @click.prevent="viewOnmap">view to map</a>
+       {{ stageID.data }} <a href="" class="data-vis" @click.prevent="viewOnmap(stageID)">view to map</a>
       </div>
 
     </div>
@@ -32,8 +32,9 @@ export default {
   data: () => ({
   }),
   methods: {
-    viewOnmap () {
+    viewOnmap (stage) {
       console.log('view data on map')
+      console.log(stage)
     }
   }
 }
