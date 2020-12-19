@@ -49,11 +49,13 @@
       <ul v-for="daVis of dataPoints" :key="daVis.id">
         <l-marker :lat-lng="prepLatLong(daVis.latlong)">
           <l-popup>
-            <div @click="innerClick(daVis)">
+            <!-- <div @click="innerClick(daVis)">
               Click to view data
               <p v-show='showParagraph'>
                 {{ daVis }}
               </p>
+            </div> -->
+            <div v-html="daVis.embed" id="vis-content">
             </div>
           </l-popup>
         </l-marker>
@@ -185,7 +187,8 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
-      showMap: true
+      showMap: true,
+      embedLive: ''
     }
   },
   methods: {
@@ -206,7 +209,10 @@ export default {
       this.showParagraph = !this.showParagraph
     },
     innerClick (dpv) {
-      alert('data chart table Simulation' + dpv.data + ' ' + dpv.name)
+      console.log('update embed')
+      console.log(dpv)
+      // alert('Data: ' + dpv.name + ' ' + dpv.data)
+      this.embedLive = dpv.embed
     },
     prepLatLong (latlong) {
       return latLng(latlong)

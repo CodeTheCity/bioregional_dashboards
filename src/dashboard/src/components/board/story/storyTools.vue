@@ -79,27 +79,30 @@ export default {
   }),
   methods: {
     listStory () {
-      console.log('list stories')
       this.storyListlive = !this.storyListlive
     },
     viewStory (vs) {
-      console.log('selected story to view stages for')
-      console.log(vs)
       this.$store.dispatch('actionLivestory', vs)
+      for (let sn of this.liveStorylist) {
+        if (sn.id === vs) {
+          this.storyName = sn.name
+        }
+      }
+      this.storyListlive = false
     },
     newStory () {
-      console.log('new story')
       this.viewBuildtools = true
       // this.$store.dispatch('actionNewstoryCount')
       this.$store.dispatch('actionEmptystages')
     },
     addStorystage (ev) {
-      console.log(ev)
-      console.log('add story stage')
+      // if the build stage tools are not visible make them
+      if (this.viewBuildtools === false) {
+        this.viewBuildtools = true
+      }
       this.addStageactive = !this.addStageactive
     },
     storyNameText () {
-      console.log('dispatsave')
       this.$store.dispatch('actionStoryname', this.storyName)
     }
   }

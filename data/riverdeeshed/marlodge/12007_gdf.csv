@@ -3,7 +3,7 @@ database,id,nrfa-public-17
 database,name,UK National River Flow Archive
 station,id,12007
 station,name,Dee at Mar Lodge
-station,gridReference,NO0978889522
+station,gridReference,NO0368014
 station,descriptionSummary,"Velocity area station, the highest on the Dee."
 station,descriptionGeneral,"Velocity area station, about 45m wide. Highest gauging station on the Dee."
 station,descriptionStationHydrometry,"Cableway rated, unstable natural control. Prolonged cold spells cause a considerable drop in flow and on rare occasions ice formation on the control requires estimation of flow. River well contained, no bypassing. Rating derived from current meter gaugings up to 2.3m (about QMED), simple extrapolation beyond. No out of bank surveys have been undertaken at this site by either SEPA or any external contractors. However, recent work by consultants following flooding from Storm Frank (Dec 2015) has suggested modelling should be undertaken to account of out of bank flow at this site as some water bypassed the station flowing through trees on the left-hand bank on the Mar Lodge estate. This may have an impact on subsequent high flow rating reviews but as of 30/10/17 this information is not available. One peak flow rating applied up to 14/08/14, where the channel profile changed significantly during the remnants of hurricane Bertha. The rating is being re-calibrated and no peak flow estimates are currently available post 14/08/14."
