@@ -45,6 +45,7 @@ export default new Vuex.Store({
     bioregionSet: {},
     loading: false,
     liveGEOJSON: {},
+    twoDmapview: false,
     showLive: false,
     zoomLive: 11.5
   },
@@ -62,8 +63,8 @@ export default new Vuex.Store({
     SET_ZOOM_MAP (state, inVerified) {
       state.zoomLive = inVerified
     },
-    SET_SHOWLIVE_MAP (state, inVerified) {
-      state.showLive = inVerified
+    SET_SHOWLIVE_MAP2D (state, inVerified) {
+      state.twoDmapview = inVerified
     },
     SET_SAVE_STORY (state, inVerified) {
       state.stageCount++
@@ -92,15 +93,15 @@ export default new Vuex.Store({
     SET_STAGE_DATA (state, inVerified) {
       let stageData = state.experimentData[inVerified.refcontract]
       state.liveDataLocation = stageData.data
-      console.log('set datalocation')
-      console.log(stageData)
-      console.log(state.liveDataLocation)
+    },
+    SET_MAP2D_STATUS (state, inVerified) {
+      state.twoDmapview = !state.twoDmapview
     }
   },
   actions: {
     async actionBioregion (context, update) {
       context.commit('SET_LOADING_BIOREGION', true)
-      context.commit('SET_SHOWLIVE_MAP', true)
+      context.commit('SET_SHOWLIVE_MAP2D', true)
       let matchBioregion = null
       for (let br of this.state.bioregionsList) {
         if (br.id === update.id) {
@@ -135,6 +136,9 @@ export default new Vuex.Store({
     },
     actionStageID (context, update) {
       context.commit('SET_STAGE_DATA', update)
+    },
+    actionHideMap (context, update) {
+      context.commit('SET_MAP2D_STATUS', update)
     }
   },
   modules: {

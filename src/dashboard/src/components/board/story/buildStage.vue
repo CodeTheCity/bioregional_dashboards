@@ -29,7 +29,14 @@
         Image
       </div>
       <div v-if="stageType.id === 3" >
-        Experiment
+        <header>Experiment</header>
+        <form id="experiment_form" name="experiment_form" method="post" action="#">
+          <ul>
+            <li class="stage-experiment">
+              <input required="" v-model="stageExperiment" @change="experimentLookup" placeholder="experiment reference">
+            </li>
+          </ul>
+        </form>
       </div>
       <button @click.prevent="saveStage" class="button is-primary">Save</button>
     </div>
@@ -44,6 +51,9 @@
         </li>
         <li>
           Text: {{ stageText }}
+        </li>
+        <li>
+          Experiment Reference {{ stageExperiment }}
         </li>
       </ul>
     </div>
@@ -76,7 +86,8 @@ export default {
       { id: 2, name: 'Image' },
       { id: 3, name: 'Experiment' }
     ],
-    stageText: ''
+    stageText: '',
+    stageExperiment: ''
   }),
   methods: {
     saveStage (ev) {
@@ -99,9 +110,14 @@ export default {
       // clear the forms
       this.stageText = ''
       this.stageName = ''
+      this.stageExperiment = ''
     },
     statetypeSelect () {
       console.log('change s')
+    },
+    experimentLookup () {
+      console.log('lookup reference contract')
+      console.log(this.stageExperiment)
     }
   }
 }

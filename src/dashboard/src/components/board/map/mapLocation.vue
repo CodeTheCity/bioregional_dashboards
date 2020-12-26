@@ -6,7 +6,7 @@
       <button @click='showLongText'>
         Toggle long popup
       </button>
-      <button @click='showMap = !showMap'>
+      <button @click="mapView2D">
         Toggle map
       </button>
       <span v-if="loading">Loading...</span>
@@ -27,7 +27,7 @@
         type="color"
       >
       <br>
-    </div> ss {{  showMap }} pp {{ show }}
+    </div>
     <l-map class="live-map"
       v-if='showMap'
       :zoom='zoom'
@@ -114,9 +114,8 @@ export default {
     loading () {
       return this.$store.state.loading
     },
-    showMapLive () {
-      this.visMap(this.$store.state.showLive)
-      return this.$store.state.showLive
+    showMap () {
+      return this.$store.state.twoDmapview
     },
     currentZoom () {
       return this.$store.state.zoomLive
@@ -187,7 +186,7 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
-      showMap: true,
+      // showMap: true,
       embedLive: ''
     }
   },
@@ -195,9 +194,8 @@ export default {
     firstSetBioregion () {
       this.$store.dispatch('actionBioregion', { id: 125, name: 'Dee watershed' })
     },
-    visMap (ms) {
-      this.showMap = ms
-      this.show = ms
+    mapView2D (ms) {
+      this.$store.dispatch('actionHideMap')
     },
     zoomUpdate (zoom) {
       this.currentZoom = zoom
