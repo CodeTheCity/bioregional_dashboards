@@ -11,7 +11,7 @@
             <label for="bioregion-select">Bioregion scale:</label>
             <select class="select-bioregion-id" id="bioregion-mapping-build" @change="bioregionSelect" v-model="bioregionID">
               <!-- <option value="none" selected="">please select</option> -->
-              <option v-for="bplace in bioregionList" :key="bplace.id" v-bind:value="bplace">
+              <option v-for="bplace in bioregionList" :selected="bplace.id === bioregionID.id ? 'selected' : ''" :key="bplace.id" v-bind:value="bplace">
                 {{ bplace.name }}
               </option>
             </select>
@@ -62,12 +62,12 @@ export default {
   },
   computed: {
     bioregionList () {
-      return [{ id: 123, name: 'Earth' }, { id: 124, name: 'Scotland' }, { id: 125, name: 'Dee watershed' }, { id: 126, name: 'Dee tributaries' }]
+      return this.$store.state.bioregions
     }
   },
   data: () => ({
     liveStorytools: false,
-    bioregionID: ''
+    bioregionID: { 'id': 125, 'name': 'Dee watershed' }
   }),
   methods: {
     viewStorytools (ev) {

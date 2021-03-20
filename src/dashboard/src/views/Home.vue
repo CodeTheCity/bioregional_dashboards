@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome, what kind of dashboard would you like to build?"/>
+    <HelloWorld msg="Welcome, build a bioregion lifeboard"/>
     <Start-Dashboard></Start-Dashboard>
     <Clone-Dashboard></Clone-Dashboard>
     <Match-Bioregion></Match-Bioregion>
