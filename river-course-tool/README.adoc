@@ -1,0 +1,88 @@
+= River course tool
+
+For the Bio Regional dashboards, we're interested in extracting from OSM:
+
+. the _relations_/_ways_/_nodes_ of all Scottish rivers
+. then for each one of those
+. extract the latitude-longitudes of its leaf nodes.
+
+Is there an easy way? Jez has pointed out that Overpass Turbo could form the basis of a solution.
+At a glance, it looks powerful and general but not easy.
+
+For _2_ & _3_, if I know a river's OSM _relations_/_ways_
+then a program could walk the XML tree to pull out its latitudes-longitudes
+and convert those into a GEOJson file.
+
+This is a proof-of-concept for that functionality.
+
+---
+
+== Use
+
+=== Setting up the tools, environment, etc.
+
+Prerequisite software:
+
+* Git 2.24.0 (_-ish_)
+* JDK 11.0.5 (_-ish_)
+* Clojure 1.10.1 (_-ish_)
+* Clojure tools 1.10.1.754 (_-ish_)
+
+
+=== Running the software
+
+[source]
+----
+$ clj -X:teith
+
+2021-03-21T13:37:54.613Z copper.lan INFO [river-course-tool.osm:97] - teith has 4 parts
+2021-03-21T13:37:57.155Z copper.lan INFO [river-course-tool.osm:59] - way/95207649 has 76 nodes
+2021-03-21T13:37:57.448Z copper.lan INFO [river-course-tool.osm:59] - way/144629109 has 12 nodes
+2021-03-21T13:37:57.681Z copper.lan INFO [river-course-tool.osm:59] - way/144629115 has 86 nodes
+2021-03-21T13:37:57.879Z copper.lan INFO [river-course-tool.osm:59] - way/61919932 has 65 nodes
+2021-03-21T13:37:57.881Z copper.lan INFO [river-course-tool.osm:99] - teith has 239 latlons
+----
+
+Which generate the 'teith.json' GEOJson file.
+Here's a sample of it:
+
+[source]
+----
+{"type":"FeatureCollection",
+ "features":
+ [{"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2238742, 56.2413052]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":{"type":"Point", "coordinates":[-4.223116, 56.2414409]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2226459, 56.2415969]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2221497, 56.2418509]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2219016, 56.2422391]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2216795, 56.2426782]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-4.2213661, 56.2430156]},
+   "properties":{}},
+  {"type":"Feature",
+   "geometry":
+   {"type":"Point", "coordinates":[-3.9816493, 56.1423139]},
+   "properties":{}}]}
+----
+
+In a GEOJson render this looks like...
+
+::image:teith-geojson-output.png[]
