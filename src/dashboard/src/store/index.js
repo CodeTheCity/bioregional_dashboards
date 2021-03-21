@@ -19,21 +19,21 @@ export default new Vuex.Store({
       { id: 124, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman-scotland.geojson', zoom: 7 },
       { id: 125, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson', zoom: 9 },
       { id: 126, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2-trib.geojson', zoom: 10 },
-      { id: 166836, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
-      { id: 415350, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
-      { id: 6668805, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 }
+      { id: '166836', geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
+      { id: '415350', geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
+      { id: '6668805', geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 }
     ],
     riverShedLists:
     {
-      166836: [18003],
-      415350: [11001, 11002, 11003, 11005, 1006],
-      6668805: [12001, 12002, 12003, 12007]
+      6668805: [18003],
+      166836: [11001, 11002, 11003, 11005, 1006],
+      415350: [12001, 12002, 12003, 12007]
     },
     riverSparql:
     {
-      166836: { query: 'a' },
-      415350: { query: 'b' },
-      6668805: { query: 'c' }
+      166836: { wikidata: '', query: 'https://query.wikidata.org/sparql?query=SELECT%20%3Friver%20%3FriverLabel%20WHERE%20%7B%0A%3Friver%20wdt%3AP31%20wd%3AQ4022%20.%0A%3Friver%20wdt%3AP17%20wd%3AQ145%20.%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%2Cen%22.%20%7D%0A%7D' },
+      415350: { wikidata: 'Q387736', query: 'https://query.wikidata.org/sparql?query=' },
+      6668805: { wikidata: 'Q964949', query: 'https://query.wikidata.org/sparql?query=' }
     },
     storyRefContracts:
     {
@@ -116,16 +116,27 @@ export default new Vuex.Store({
   },
   actions: {
     async actionBioregion (context, update) {
+      console.log('action index')
+      console.log(update)
       context.commit('SET_LOADING_BIOREGION', true)
       context.commit('SET_SHOWLIVE_MAP2D', true)
       let matchBioregion = null
       for (let br of this.state.bioregionsList) {
         if (br.id === update.id) {
+          console.log(br.id)
+          console.log(update.id)
           matchBioregion = br
         }
       }
+      console.log('bio region selected')
+      console.log(matchBioregion)
       context.commit('SET_ZOOM_MAP', matchBioregion.zoom)
-      const response = await fetch(matchBioregion.geojson)
+      // now need to build one or many watershed areas
+      let matchBioregWatershed = this.state.riverShedLists[update.id]
+      console.log(matchBioregWatershed)
+      let prepareGeoJSON = matchBioregion.geojson + matchBioregWatershed[0] + '.geojson'
+      console.log(prepareGeoJSON)
+      const response = await fetch(prepareGeoJSON)
       // const response = await fetch('https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson')
       // const response = await fetch('http://localhost:8080/communes-pays-de-la-loire.geojson')
       const data = await response.json()

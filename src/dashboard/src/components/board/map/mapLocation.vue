@@ -192,7 +192,7 @@ export default {
   },
   methods: {
     firstSetBioregion () {
-      this.$store.dispatch('actionBioregion', { id: 125, name: 'Dee watershed' })
+      this.$store.dispatch('actionBioregion')
     },
     mapView2D (ms) {
       this.$store.dispatch('actionHideMap')

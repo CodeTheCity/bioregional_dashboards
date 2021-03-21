@@ -95,9 +95,9 @@ export default {
       console.log(place)
       this.selectedPlace = place
       // query for specific wikipedia page METHOD 1
-      let url2 = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=River_Dee,_Aberdeenshire'
+      /* let url2 = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=River_Dee,_Aberdeenshire'
       let pageExtract = await axios.get(url2)
-      console.log(pageExtract)
+      console.log(pageExtract) */
       // look up wikipedia page
       // https://en.wikipedia.org/w/api.php?action=query&titles=belgrade&prop=extracts%7Cpageimages%7Cinfo&pithumbsize=400&inprop=url&redirects=&format=json&origin=*
       // wikipedia page info API call
@@ -115,6 +115,9 @@ export default {
     checkBioregionDataMap (wikiID) {
       console.log('check for bioregion map data')
       console.log(wikiID)
+      let bioregionID = { 'id': wikiID, 'name': '' }
+      // set the bioregion
+      this.$store.dispatch('actionBioregion', bioregionID)
       let bioMapKeys = [{ wikid: '415350' }, { wikid: '166836' }, { wikid: '6668805' }, { wikid: 1237 }, { wikid: 1238 }]
       this.matchMapData = bioMapKeys.some(u => u.wikid === wikiID)
       console.log(this.matchMapData)

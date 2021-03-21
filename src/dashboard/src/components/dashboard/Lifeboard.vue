@@ -67,7 +67,7 @@ export default {
   },
   data: () => ({
     liveStorytools: false,
-    bioregionID: { 'id': 125, 'name': 'Dee watershed' }
+    bioregionID: { 'id': '', 'name': '' }
   }),
   methods: {
     viewStorytools (ev) {
