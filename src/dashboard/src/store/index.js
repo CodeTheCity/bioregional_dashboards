@@ -18,8 +18,23 @@ export default new Vuex.Store({
       { id: 123, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman-earth.geojson', zoom: 2 },
       { id: 124, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman-scotland.geojson', zoom: 7 },
       { id: 125, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson', zoom: 9 },
-      { id: 126, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2-trib.geojson', zoom: 10 }
+      { id: 126, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2-trib.geojson', zoom: 10 },
+      { id: 166836, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
+      { id: 415350, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 },
+      { id: 6668805, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/watershedgeojson/', zoom: 9 }
     ],
+    riverShedLists:
+    {
+      166836: [18003],
+      415350: [11001, 11002, 11003, 11005, 1006],
+      6668805: [12001, 12002, 12003, 12007]
+    },
+    riverSparql:
+    {
+      166836: { query: 'a' },
+      415350: { query: 'b' },
+      6668805: { query: 'c' }
+    },
     storyRefContracts:
     {
       '0001': { stages: [{ refcontract: 303031, name: 'introduction', type: 'text', text: 'the history of the rive dee water flow over the decades' }, { refcontract: 303032, name: '1950 water flow', type: 'data', text: '', data: '99881' }, { refcontract: 303033, name: 'Live water flow', type: 'data', data: 'dfdfd' }, { refcontract: 303034, name: 'Trend analysis', type: 'data', data: '12345' }] },

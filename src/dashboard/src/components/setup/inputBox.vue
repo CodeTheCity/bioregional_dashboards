@@ -33,6 +33,15 @@
           There is no bioregion prepared for this place.  Follow these steps to build out a map. . .
           <button @click.prevent="buildMap" class="button is-primary">Build map</button>
         </div>
+        <div id="build-new-bioregion" v-if="newBuildStart === true">
+          <ul>
+            <li>Place</li>
+            <li>Communities</li>
+            <li>River</li>
+            <li>Watershed</li>
+            <li>Data Science Stories</li>
+          </ul>
+        </div>
       </div>
       <div v-html="wikipage">
       </div>
@@ -63,7 +72,8 @@ export default {
     querylist: [],
     selectedPlace: '',
     matchMapData: false,
-    rawRiverpage: ''
+    rawRiverpage: '',
+    newBuildStart: false
   }),
   methods: {
     async startBuild () {
@@ -116,6 +126,10 @@ export default {
       let urlriverQuery = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + rivers + '&prop=extracts%7Cpageimages%7Cinfo&pithumbsize=400&inprop=url&redirects=&format=json&origin=*'
       // console.log(urlriverQuery)
       this.rawRiverpage = await axios.get(urlriverQuery)
+    },
+    buildMap () {
+      console.log('buildmap')
+      this.newBuildStart = !this.newBuildStart
     }
   }
 }
