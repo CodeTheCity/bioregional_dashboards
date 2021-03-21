@@ -7,19 +7,19 @@ export default new Vuex.Store({
   state: {
     bioregions: [{ id: 123, name: 'Earth' }, { id: 124, name: 'Scotland' }, { id: 125, name: 'Dee watershed' }, { id: 126, name: 'Dee tributaries' }],
     storyLive: [{ name: 'Waterflow', id: '0001' }, { name: 'Rainfall', id: '0002' }, { name: 'Soil', id: '0003' }, { name: 'Plants', id: '0004' }, { name: 'Birds', id: '0005' }, { name: 'Snow', id: '0006' }, { name: 'Population', id: '0007' }],
-    bioregionsList:
+    /* bioregionsList:
     [
       { id: 123, geojson: 'http://localhost:8080/geoman-earth.geojson', zoom: 2 },
       { id: 124, geojson: 'http://localhost:8080/geoman-scotland.geojson', zoom: 7 },
       { id: 125, geojson: 'http://localhost:8080/geoman2.geojson', zoom: 9 },
       { id: 126, geojson: 'http://localhost:8080/geoman2-trib.geojson', zoom: 10 }
-    ],
-    /* bioregionsList: [
+    ], */
+    bioregionsList: [
       { id: 123, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman-earth.geojson', zoom: 2 },
       { id: 124, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman-scotland.geojson', zoom: 7 },
       { id: 125, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2.geojson', zoom: 9 },
       { id: 126, geojson: 'https://raw.githubusercontent.com/CodeTheCity/bioregional_dashboards/main/data/geojsonshed/geoman2-trib.geojson', zoom: 10 }
-    ], */
+    ],
     storyRefContracts:
     {
       '0001': { stages: [{ refcontract: 303031, name: 'introduction', type: 'text', text: 'the history of the rive dee water flow over the decades' }, { refcontract: 303032, name: '1950 water flow', type: 'data', text: '', data: '99881' }, { refcontract: 303033, name: 'Live water flow', type: 'data', data: 'dfdfd' }, { refcontract: 303034, name: 'Trend analysis', type: 'data', data: '12345' }] },
