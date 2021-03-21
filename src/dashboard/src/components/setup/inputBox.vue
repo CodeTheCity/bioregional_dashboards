@@ -65,7 +65,6 @@ export default {
   methods: {
     async startBuild () {
       console.log('start build bioergion')
-      this.lookupRiversScotland()
       // move to lifeboard visualisation
       // this.$router.push('dashboard')
       let inputQuery = this.biointerest.text
