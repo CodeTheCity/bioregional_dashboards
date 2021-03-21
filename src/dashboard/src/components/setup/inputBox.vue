@@ -27,6 +27,7 @@
       <div id="bioregion-message" v-if="selectedPlace.length > 2">
         <div id="message-postive" v-if="matchMapData === true">
           OK, display the map here and the toolbars
+          <life-board></life-board>
         </div>
         <div id="message-notready" v-if="matchMapData === false">
           There is no bioregion prepared for this place.  Follow these steps to build out a map. . .
@@ -45,10 +46,12 @@
 
 <script>
 import axios from 'axios'
+import LifeBoard from '@/components/dashboard/Lifeboard.vue'
 
 export default {
   name: 'inputbox',
   components: {
+    LifeBoard
   },
   data: () => ({
     biointerest:
@@ -147,7 +150,7 @@ export default {
 
 #wikipage-page {
   border: 1px solid red;
-  height: 360px;
+  height: 960px;
   overflow: scroll;
 }
 </style>
