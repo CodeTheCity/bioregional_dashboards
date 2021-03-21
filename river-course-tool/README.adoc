@@ -83,3 +83,6 @@ Here's a sample of it:
    "properties":{}}]}
 ----
 
+In a GEOJson render this looks like...
+
+::image:teith-geojson-output.png[]
